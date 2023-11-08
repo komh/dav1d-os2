@@ -422,13 +422,15 @@ if is_asm_enabled and host_machine.cpu_family().startswith('x86')
         nasm_format = 'win'
     elif host_machine.system() in ['darwin', 'ios', 'tvos']
         nasm_format = 'macho'
-    elif host_machine.system() == 'os/2'
-        nasm_format = 'obj'
     else
         nasm_format = 'elf'
     endif
     if host_machine.system() == 'os/2'
-        # nothing
+        if get_option('emxomf')
+            nasm_format = 'obj'
+        else
+            nasm_format = 'aout'
+        endif
     elif host_machine.cpu_family() == 'x86_64'
         nasm_format += '64'
     else
