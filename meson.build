@@ -386,7 +386,7 @@ cdata.set10('ARCH_PPC64LE', host_machine.cpu() == 'ppc64le')
 # meson's cc.symbols_have_underscore_prefix() is unfortunately unrelieably
 # when additional flags like '-fprofile-instr-generate' are passed via CFLAGS
 # see following meson issue https://github.com/mesonbuild/meson/issues/5482
-if (host_machine.system() in ['darwin', 'ios', 'tvos'] or
+if (host_machine.system() in ['darwin', 'ios', 'tvos', 'os/2'] or
    (host_machine.system() == 'windows' and host_machine.cpu_family() == 'x86'))
     cdata.set10('PREFIX', true)
     cdata_asm.set10('PREFIX', true)
@@ -418,14 +418,12 @@ if is_asm_enabled and host_machine.cpu_family().startswith('x86')
     # Generate config.asm
     config_asm_target = configure_file(output: 'config.asm', output_format: 'nasm', configuration: cdata_asm)
 
-    nasm_prefix = ''
     if host_machine.system() == 'windows'
         nasm_format = 'win'
     elif host_machine.system() in ['darwin', 'ios', 'tvos']
         nasm_format = 'macho'
     elif host_machine.system() == 'os/2'
         nasm_format = 'obj'
-        nasm_prefix = '-DPREFIX'
     else
         nasm_format = 'elf'
     endif
@@ -445,7 +443,6 @@ if is_asm_enabled and host_machine.cpu_family().startswith('x86')
             '-I', '@0@/src/'.format(dav1d_src_root),
             '-I', '@0@/'.format(meson.current_build_dir()),
             '-MQ', '@OUTPUT@', '-MF', '@DEPFILE@',
-            nasm_prefix,
             '@EXTRA_ARGS@',
             '@INPUT@',
             '-o', '@OUTPUT@'
