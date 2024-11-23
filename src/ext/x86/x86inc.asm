@@ -92,7 +92,7 @@
     %elifidn __OUTPUT_FORMAT__,aout
         SECTION .text
     %elifidn __OUTPUT_FORMAT__,obj
-        SECTION TEXT32 public align=%1 use32 class=CODE flat
+        SECTION CONST32 public align=%1 use32 class=CONST flat
     %else
         SECTION .rodata align=%1
     %endif
