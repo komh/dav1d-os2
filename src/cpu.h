@@ -71,13 +71,13 @@ static ALWAYS_INLINE unsigned dav1d_get_cpu_flags(void) {
     defined(__AVX512IFMA__) && defined(__AVX512VBMI__) && \
     defined(__AVX512VBMI2__) && defined(__AVX512VPOPCNTDQ__) && \
     defined(__AVX512BITALG__) && defined(__GFNI__) && \
-    defined(__VAES__) && defined(__VPCLMULQDQ__)
+    defined(__VAES__) && defined(__VPCLMULQDQ__) && !defined(__OS2__)
     flags |= DAV1D_X86_CPU_FLAG_AVX512ICL |
              DAV1D_X86_CPU_FLAG_AVX2 |
              DAV1D_X86_CPU_FLAG_SSE41 |
              DAV1D_X86_CPU_FLAG_SSSE3 |
              DAV1D_X86_CPU_FLAG_SSE2;
-#elif defined(__AVX2__)
+#elif defined(__AVX2__) && !defined(__OS2__)
     flags |= DAV1D_X86_CPU_FLAG_AVX2 |
              DAV1D_X86_CPU_FLAG_SSE41 |
              DAV1D_X86_CPU_FLAG_SSSE3 |

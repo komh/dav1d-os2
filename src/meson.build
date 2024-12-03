@@ -168,46 +168,50 @@ if is_asm_enabled
             'x86/cpuid.asm',
             'x86/msac.asm',
             'x86/refmvs.asm',
+            'x86/itx_avx512.asm',
+            'x86/cdef_avx2.asm',
+            'x86/itx_avx2.asm',
+            'x86/looprestoration_avx2.asm',
             'x86/cdef_sse.asm',
             'x86/itx_sse.asm',
         )
 
-        if host_machine.system() != 'os/2'
-            libdav1d_source_asm += files(
-                'x86/itx_avx512.asm',
-                'x86/cdef_avx2.asm',
-                'x86/itx_avx2.asm',
-                'x86/looprestoration_avx2.asm',
-            )
-        endif
-
         if dav1d_bitdepths.contains('8')
             libdav1d_sources_asm += files(
+                'x86/cdef_avx512.asm',
+                'x86/filmgrain_avx512.asm',
+                'x86/ipred_avx512.asm',
+                'x86/loopfilter_avx512.asm',
+                'x86/looprestoration_avx512.asm',
+                'x86/mc_avx512.asm',
+                'x86/filmgrain_avx2.asm',
+                'x86/ipred_avx2.asm',
+                'x86/loopfilter_avx2.asm',
+                'x86/mc_avx2.asm',
                 'x86/filmgrain_sse.asm',
                 'x86/ipred_sse.asm',
                 'x86/loopfilter_sse.asm',
                 'x86/looprestoration_sse.asm',
                 'x86/mc_sse.asm',
             )
-
-            if host_machine.system() != 'os/2'
-                libdav1d_sources_asm += files(
-                    'x86/cdef_avx512.asm',
-                    'x86/filmgrain_avx512.asm',
-                    'x86/ipred_avx512.asm',
-                    'x86/loopfilter_avx512.asm',
-                    'x86/looprestoration_avx512.asm',
-                    'x86/mc_avx512.asm',
-                    'x86/filmgrain_avx2.asm',
-                    'x86/ipred_avx2.asm',
-                    'x86/loopfilter_avx2.asm',
-                    'x86/mc_avx2.asm',
-                )
-            endif
         endif
 
         if dav1d_bitdepths.contains('16')
             libdav1d_sources_asm += files(
+                'x86/cdef16_avx512.asm',
+                'x86/filmgrain16_avx512.asm',
+                'x86/ipred16_avx512.asm',
+                'x86/itx16_avx512.asm',
+                'x86/loopfilter16_avx512.asm',
+                'x86/looprestoration16_avx512.asm',
+                'x86/mc16_avx512.asm',
+                'x86/cdef16_avx2.asm',
+                'x86/filmgrain16_avx2.asm',
+                'x86/ipred16_avx2.asm',
+                'x86/itx16_avx2.asm',
+                'x86/loopfilter16_avx2.asm',
+                'x86/looprestoration16_avx2.asm',
+                'x86/mc16_avx2.asm',
                 'x86/cdef16_sse.asm',
                 'x86/filmgrain16_sse.asm',
                 'x86/ipred16_sse.asm',
@@ -215,27 +219,7 @@ if is_asm_enabled
                 'x86/loopfilter16_sse.asm',
                 'x86/looprestoration16_sse.asm',
                 'x86/mc16_sse.asm',
-                'x86/ipred16_avx2.asm',
             )
-
-            if host_machine.system() != 'os/2'
-                libdav1d_sources_asm += files(
-                    'x86/cdef16_avx512.asm',
-                    'x86/filmgrain16_avx512.asm',
-                    'x86/ipred16_avx512.asm',
-                    'x86/itx16_avx512.asm',
-                    'x86/loopfilter16_avx512.asm',
-                    'x86/looprestoration16_avx512.asm',
-                    'x86/mc16_avx512.asm',
-                    'x86/cdef16_avx2.asm',
-                    'x86/filmgrain16_avx2.asm',
-                    'x86/ipred16_avx2.asm',
-                    'x86/itx16_avx2.asm',
-                    'x86/loopfilter16_avx2.asm',
-                    'x86/looprestoration16_avx2.asm',
-                    'x86/mc16_avx2.asm',
-                )
-            endif
         endif
 
         # Compile the ASM sources with NASM
