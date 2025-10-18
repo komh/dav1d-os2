@@ -559,7 +559,7 @@ if is_asm_enabled and host_machine.cpu_family().startswith('x86')
     endif
     if host_machine.system() == 'os/2'
         if get_option('emxomf')
-            nasm_format = 'obj'
+            nasm_format = 'obj2'
         else
             nasm_format = 'aout'
         endif
